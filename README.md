@@ -1,6 +1,16 @@
 # CIでmicroCMSからメディア一式をダウンロードする
 
+microCMSの画像類一式をNextの生成物の中に含めるためのコード。独自ドメイン配下に画像類を置くことができるように。
+
 ## 準備
 
-- microCMSのサービスID,APIキー
-- GHAに環境変数のセット
+- microCMSのサービスID,APIキー発行
+- microCMSでwebhook設定([webhook設定参考1](https://document.microcms.io/manual/webhook-setting), [webhook設定参考2](https://kimulaco.com/post/microcms-webhook-to-github-actions/))
+- GHAに環境変数(microCMSのサービスID,APIキー)のセット
+- GHのアクセストークン発行(有効期限があるため、期限切れをalertする仕組みなども別途必要)
+
+## 流れ
+
+1. `npm run assets`でmicroCMSから画像類ダウンロード(public/assetsに格納)
+2. `npm run build`で静的生成
+3. `cp -r public/assets out/assets`で静的生成物にダウンロードしたものを格納

@@ -1,0 +1,28 @@
+name: 🚀 deploy
+
+on:
+  repository_dispatch:
+    types: [update-microcms-contents]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      matrix:
+        node-version: [18.14.1]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Node.js v${{ matrix.node-version }} ⚙
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: NPM インストール 🎁 💨
+        run: npm ci
+      - name: microCMSからのダウンロード 🎁 💨
+        run: npm run assets
+        env:
+          MICRO_CMS_API_SERVICE_ID: ${{ secrets.MICRO_CMS_API_SERVICE_ID }}
+          MICRO_CMS_API_KEY: ${{ secrets.MICRO_CMS_API_KEY }}
+      - name: ビルド 📦 🔨
+        run: npm run build
+  # deploy: ...
