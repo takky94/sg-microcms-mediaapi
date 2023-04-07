@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "assets": "ts-node -O '{\"module\":\"commonjs\"}' scripts/download.ts",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
