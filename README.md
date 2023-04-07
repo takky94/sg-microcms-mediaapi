@@ -13,4 +13,9 @@ microCMSの画像類一式をNextの生成物の中に含めるためのコー�
 
 1. `npm run assets`でmicroCMSから画像類ダウンロード(public/assetsに格納)
 2. `npm run build`で静的生成
-3. `cp -r public/assets out/assets`で静的生成物にダウンロードしたものを格納
+
+## やってないこと
+
+- `<img src="画像類の向き先">`を環境ごとに変更する
+
+ローカルサーバーではmicroCMSから取得してprodのみでassetsは以下のものを使う方が良さそう
